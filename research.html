@@ -34,11 +34,14 @@
     <header class="bg-black/30 backdrop-blur-sm fixed w-full z-50 shadow-md">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-white">Monochrome Security</a>
-            <div class="hidden md:flex space-x-2 text-sm font-medium">
-                <a href="index.html#about" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">About</a>
-                <a href="index.html#services" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">Services</a>
-                <a href="research.html" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">Research</a>
-                <a href="index.html#contact" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300">Contact Us</a>
+            <div class="hidden md:flex space-x-2 text-sm font-medium items-center">
+                <a href="index.html#about" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="About" data-ja="私たちについて">About</a>
+                <a href="index.html#services" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Services" data-ja="サービス">Services</a>
+                <a href="research.html" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Research" data-ja="研究">Research</a>
+                <a href="index.html#contact" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+                <button id="lang-toggle" class="ml-4 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
+                    <span id="lang-text">日本語</span>
+                </button>
             </div>
             <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -47,48 +50,51 @@
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-black/70 backdrop-blur-sm shadow-lg py-4">
-            <a href="index.html#about" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
-            <a href="index.html#services" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Services</a>
-            <a href="research.html" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Research</a>
-            <a href="index.html#contact" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Contact Us</a>
+            <a href="index.html#about" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="About" data-ja="私たちについて">About</a>
+            <a href="index.html#services" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Services" data-ja="サービス">Services</a>
+            <a href="research.html" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Research" data-ja="研究">Research</a>
+            <a href="index.html#contact" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+            <button id="mobile-lang-toggle" class="block mx-auto mt-2 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
+                <span id="mobile-lang-text">日本語</span>
+            </button>
         </div>
     </header>
 
     <main class="pt-24 min-h-screen">
         <section class="py-10 bg-black/20">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl font-bold mb-4 text-white"> Research & Publications</h1>
-                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300">
+                <h1 class="text-4xl font-bold mb-4 text-white" data-en="Research & Publications" data-ja="研究・公開情報"> Research & Publications</h1>
+                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300" data-en="This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers." data-ja="このページでは、当社が発見したCVE（共通脆弱性情報）やその他のセキュリティ研究論文など、当社の公開研究を紹介します。">
                     This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers.
                 </p>
 
                 <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
-                    <h2 class="text-2xl font-semibold mb-6 text-white text-left">Our Discovered CVEs</h2>
-                    <p class="text-gray-400 text-left mb-6">
+                    <h2 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Our Discovered CVEs" data-ja="当社が発見したCVE">Our Discovered CVEs</h2>
+                    <p class="text-gray-400 text-left mb-6" data-en="We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details." data-ja="セキュリティコミュニティへの貢献を誇りに思います。以下は、当社が責任を持って開示したCVEのリストと、詳細情報へのリンクです。">
                         We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details.
                     </p>
                     <div class="space-y-4 text-left">
                         <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/eucookielaw/eucookielaw-272-unauthenticated-arbitrary-file-read" class="cve-item p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
                             <h3 class="font-bold text-lg text-white">CVE-2025-3897</h3>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300">View Details &rarr;</span>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
                         </a>
                         <a href="https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/funnelcockpit/funnelcockpit-142-reflected-cross-site-scripting-via-error-parameter" class="cve-item p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
                             <h3 class="font-bold text-lg text-white">CVE-2025-6588</h3>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300">View Details &rarr;</span>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
-                    <h2 class="text-2xl font-semibold mb-6 text-white text-left">Academic Research & Publications</h2>
-                    <p class="text-gray-400 text-left mb-6">
+                    <h2 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Academic Research & Publications" data-ja="学術研究・公開情報">Academic Research & Publications</h2>
+                    <p class="text-gray-400 text-left mb-6" data-en="Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles." data-ja="当社チームは、深い研究を通じてサイバーセキュリティ分野の発展に貢献することを目指しています。以下は、当社が公開した論文や記事の一部へのリンクです。">
                         Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles.
                     </p>
                     <div class="space-y-4 text-left">
                         <a href="https://kth.diva-portal.org/smash/record.jsf?dswid=-9416&pid=diva2%3A1632105&c=1&searchType=SIMPLE&language=en&query=nicolai+hellesnes&af=%5B%5D&aq=%5B%5B%5D%5D&aq2=%5B%5B%5D%5D&aqe=%5B%5D&noOfRows=50&sortOrder=author_sort_asc&sortOrder2=title_sort_asc&onlyFullText=false&sf=all" class="p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300 block">
-                            <h3 class="font-bold text-lg text-white">Ethical Hacking of an IoT camera</h3>
-                            <p class="text-sm text-gray-500">Published on KTH DiVA, 2022</p>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300 mt-2 inline-block">Read Paper &rarr;</span>
+                            <h3 class="font-bold text-lg text-white" data-en="Ethical Hacking of an IoT camera" data-ja="IoTカメラのエシカルハッキング">Ethical Hacking of an IoT camera</h3>
+                            <p class="text-sm text-gray-500" data-en="Published on KTH DiVA, 2022" data-ja="KTH DiVAで公開、2022年">Published on KTH DiVA, 2022</p>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300 mt-2 inline-block" data-en="Read Paper &rarr;" data-ja="論文を読む &rarr;">Read Paper &rarr;</span>
                         </a>
                     </div>
                 </div>
@@ -98,10 +104,46 @@
     </main>
 
     <footer class="bg-black/30 text-white/50 text-center py-8 mt-12">
-        <p>&copy; 2025 Monochrome Security. All Rights Reserved.</p>
+        <p data-en="2025 Monochrome Security." data-ja="2025 Monochrome Security.">2025 Monochrome Security.</p>
     </footer>
 
     <script>
+        // Language switching functionality
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        function updatePageLanguage() {
+            // Update all elements with language data attributes
+            document.querySelectorAll('[data-en][data-ja]').forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Update language toggle buttons - show the language you can switch TO
+            const langText = currentLang === 'en' ? '日本語' : 'English';
+            document.getElementById('lang-text').textContent = langText;
+            document.getElementById('mobile-lang-text').textContent = langText;
+
+            // Update page language attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        function switchLanguage() {
+            currentLang = currentLang === 'en' ? 'ja' : 'en';
+            localStorage.setItem('language', currentLang);
+            updatePageLanguage();
+        }
+
+        // Initialize page with saved language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePageLanguage();
+
+            // Add event listeners for language toggle buttons
+            document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+            document.getElementById('mobile-lang-toggle').addEventListener('click', switchLanguage);
+        });
+
         // Mobile menu toggle.
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');

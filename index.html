@@ -30,11 +30,14 @@
     <header class="bg-black/30 backdrop-blur-sm fixed w-full z-50 shadow-md">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white">Monochrome Security</a>
-            <div class="hidden md:flex space-x-2 text-sm font-medium">
-                <a href="#about" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">About</a>
-                <a href="#services" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">Services</a>
-                <a href="research.html" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10">Research</a>
-                <a href="#contact" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300">Contact Us</a>
+            <div class="hidden md:flex space-x-2 text-sm font-medium items-center">
+                <a href="#about" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="About" data-ja="私たちについて">About</a>
+                <a href="#services" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Services" data-ja="サービス">Services</a>
+                <a href="research.html" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Research" data-ja="研究">Research</a>
+                <a href="#contact" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+                <button id="lang-toggle" class="ml-4 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
+                    <span id="lang-text">日本語</span>
+                </button>
             </div>
             <!-- Mobile Menu Button -->
             <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
@@ -45,10 +48,13 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-black/70 backdrop-blur-sm shadow-lg py-4">
-            <a href="#about" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">About</a>
-            <a href="#services" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Services</a>
-            <a href="research.html" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Research</a>
-            <a href="#contact" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300">Contact Us</a>
+            <a href="#about" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="About" data-ja="私たちについて">About</a>
+            <a href="#services" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Services" data-ja="サービス">Services</a>
+            <a href="research.html" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Research" data-ja="研究">Research</a>
+            <a href="#contact" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+            <button id="mobile-lang-toggle" class="block mx-auto mt-2 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
+                <span id="mobile-lang-text">日本語</span>
+            </button>
         </div>
     </header>
 
@@ -56,11 +62,11 @@
         <!-- Hero Section -->
         <section class="bg-cover bg-center h-screen flex items-center" style="background-image: url('images/hero.png');">
             <div class="container mx-auto px-6 text-center text-white bg-black/40 backdrop-blur-sm rounded-xl py-12">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">Protecting the Digital World</h1>
-                <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4" data-en="Protecting the Digital World" data-ja="デジタル世界を守る">Protecting the Digital World</h1>
+                <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto" data-en="Expert cybersecurity consultancy services to safeguard your business from evolving threats." data-ja="進化する脅威からお客様のビジネスを守る専門的なサイバーセキュリティコンサルティングサービス。">
                     Expert cybersecurity consultancy services to safeguard your business from evolving threats.
                 </p>
-                <a href="#services" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                <a href="#services" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105" data-en="Explore Our Services" data-ja="サービスを見る">
                     Explore Our Services
                 </a>
             </div>
@@ -69,8 +75,8 @@
         <!-- About Section -->
         <section id="about" class="py-20 bg-black/20">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white">Who We Are</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300">
+                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Who We Are" data-ja="私たちについて">Who We Are</h2>
+                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300" data-en="Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the complex threat landscape. Our team of brings skill & experience in penetration testing, threat modeling, and security awareness training to deliver proactive and robust security solutions. We believe that security is not just a technology issue, but a business enabler." data-ja="Monochrome Securityは、複雑な脅威環境をナビゲートするお客様をサポートする、サイバーセキュリティ分野のリーディングカンパニーです。当社のチームは、ペネトレーションテスト、脅威モデリング、セキュリティ意識向上トレーニングにおけるスキルと経験を持ち、積極的で堅牢なセキュリティソリューションを提供します。セキュリティは単なる技術的な問題ではなく、ビジネスを可能にするものだと私たちは信じています。">
                     Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the complex threat landscape. Our team of brings skill & experience in penetration testing, threat modeling, and security awareness training to deliver proactive and robust security solutions. We believe that security is not just a technology issue, but a business enabler.
                 </p>
                 <div class="grid md:grid-cols-3 gap-8">
@@ -78,22 +84,22 @@
                         <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white">Proven Track Record</h3>
-                        <p class="text-gray-400">Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background.</p>
+                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Proven Track Record" data-ja="確かな実績">Proven Track Record</h3>
+                        <p class="text-gray-400" data-en="Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background." data-ja="当社の作業には、複数のCVE公開やサイバーセキュリティの学術研究が含まれ、実用的な脆弱性発見と強固な研究背景を組み合わせています。">Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background.</p>
                     </div>
                     <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
                         <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white">Proactive Defense</h3>
-                        <p class="text-gray-400">We focus on proactive security measures to prevent breaches before they happen, saving you time and money.</p>
+                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Proactive Defense" data-ja="積極的防御">Proactive Defense</h3>
+                        <p class="text-gray-400" data-en="We focus on proactive security measures to prevent breaches before they happen, saving you time and money." data-ja="セキュリティ侵害が発生する前に防止する積極的なセキュリティ対策に焦点を当て、お客様の時間とコストを節約します。">We focus on proactive security measures to prevent breaches before they happen, saving you time and money.</p>
                     </div>
                     <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
                         <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18v-9m0-9c-1.657 0-3 4.03-3 9s1.343 9 3 9m-9-9h9" />
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white">Tailored Solutions</h3>
-                        <p class="text-gray-400">Every business is unique. We provide customized security strategies that fit your specific needs and budget.</p>
+                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Tailored Solutions" data-ja="カストマイズソリューション">Tailored Solutions</h3>
+                        <p class="text-gray-400" data-en="Every business is unique. We provide customized security strategies that fit your specific needs and budget." data-ja="すべてのビジネスはユニークです。お客様の特定のニーズと予算に合わせたカスタマイズされたセキュリティ戦略を提供します。">Every business is unique. We provide customized security strategies that fit your specific needs and budget.</p>
                     </div>
                 </div>
             </div>
@@ -102,8 +108,8 @@
         <!-- Services Section -->
         <section id="services" class="py-20 bg-[#1a1a2e]">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white">Our Services</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300">
+                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Our Services" data-ja="サービス">Our Services</h2>
+                <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300" data-en="From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level." data-ja="積極的なテストからセキュリティ意識向上トレーニングまで、包括的なサービスでお客様のビジネスをあらゆるレベルで保護します。">
                     From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level.
                 </p>
                 <div class="grid md:grid-cols-3 gap-8">
@@ -111,8 +117,8 @@
                         <svg class="h-16 w-16 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2 L20 6 V12 C20 17 16 22 12 22 C8 22 4 17 4 12 V6 L12 2 Z" />
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Penetration Testing</h3>
-                        <p class="text-gray-400">
+                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Penetration Testing" data-ja="ペネトレーションテスト">Penetration Testing</h3>
+                        <p class="text-gray-400" data-en="Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do." data-ja="ハッカーよりも先にWebアプリケーション、ネットワーク、モバイルアプリの脆弱性を発見・修正するために、現実的な攻撃をシミュレートします。">
                             Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do.
                         </p>
                     </div>
@@ -122,8 +128,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9v4a8 8 0 008 8 8 8 0 008-8V9" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v6" />
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Security Awareness Training</h3>
-                        <p class="text-gray-400">
+                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Security Awareness Training" data-ja="セキュリティ意識向上トレーニング">Security Awareness Training</h3>
+                        <p class="text-gray-400" data-en="Empower your employees to be your first line of defense with our interactive and engaging security training programs." data-ja="インタラクティブで魅力的なセキュリティトレーニングプログラムで、従業員を最初の防衛線に育成します。">
                             Empower your employees to be your first line of defense with our interactive and engaging security training programs.
                         </p>
                     </div>
@@ -131,8 +137,8 @@
                         <svg class="h-16 w-16 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white">Cyber Risk Assessment</h3>
-                        <p class="text-gray-400">
+                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Cyber Risk Assessment" data-ja="サイバーリスク評価">Cyber Risk Assessment</h3>
+                        <p class="text-gray-400" data-en="Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture." data-ja="組織のセキュリティリスクを特定・優先順位つけし、より強固なセキュリティ体制のための戦略的ロードマップを構築します。">
                             Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture.
                         </p>
                     </div>
@@ -143,15 +149,15 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 bg-black/20">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white">Contact Us</h2>
-                <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300">
+                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</h2>
+                <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300" data-en="Ready to protect your business? Get in touch with our team today for a free consultation." data-ja="ビジネスを守る準備はできていますか？無料コンサルテーションのために、今すぐ当社チームにご連絡ください。">
                     Ready to protect your business? Get in touch with our team today for a free consultation.
                 </p>
                 <form id="contact-form" action="https://formsubmit.co/contact@monochromesecurity.com" method="POST" class="max-w-xl mx-auto space-y-4 relative">
-                    <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300">
-                    <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300">
-                    <textarea name="message" placeholder="Your Message" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300"></textarea>
-                    <button type="submit" id="submit-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                    <input type="text" name="name" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Name" data-ja-placeholder="お名前" placeholder="Your Name">
+                    <input type="email" name="email" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Email" data-ja-placeholder="メールアドレス" placeholder="Your Email">
+                    <textarea name="message" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Message" data-ja-placeholder="メッセージ" placeholder="Your Message"></textarea>
+                    <button type="submit" id="submit-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-300 transform hover:scale-105" data-en="Send Message" data-ja="メッセージを送信">
                         Send Message
                     </button>
                     <div id="message-box" class="hidden absolute left-1/2 -translate-x-1/2 mt-4 p-4 rounded-lg text-sm transition-all duration-500 transform"></div>
@@ -162,10 +168,54 @@
 
     <!-- Footer -->
     <footer class="bg-black/30 text-white/50 text-center py-8">
-        <p>&copy; 2025 Monochrome Security. All Rights Reserved.</p>
+        <p>2025 Monochrome Security.</p>
     </footer>
 
     <script>
+        // Language switching functionality
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        function updatePageLanguage() {
+            // Update all elements with language data attributes
+            document.querySelectorAll('[data-en][data-ja]').forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Update form placeholders
+            document.querySelectorAll('[data-en-placeholder][data-ja-placeholder]').forEach(element => {
+                const placeholder = element.getAttribute(`data-${currentLang}-placeholder`);
+                if (placeholder) {
+                    element.placeholder = placeholder;
+                }
+            });
+
+            // Update language toggle buttons - show the language you can switch TO
+            const langText = currentLang === 'en' ? '日本語' : 'English';
+            document.getElementById('lang-text').textContent = langText;
+            document.getElementById('mobile-lang-text').textContent = langText;
+
+            // Update page language attribute
+            document.documentElement.lang = currentLang;
+        }
+
+        function switchLanguage() {
+            currentLang = currentLang === 'en' ? 'ja' : 'en';
+            localStorage.setItem('language', currentLang);
+            updatePageLanguage();
+        }
+
+        // Initialize page with saved language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePageLanguage();
+
+            // Add event listeners for language toggle buttons
+            document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+            document.getElementById('mobile-lang-toggle').addEventListener('click', switchLanguage);
+        });
+
         // Smooth scrolling for navigation.
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
