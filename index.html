@@ -26,6 +26,10 @@
             background-color: #5c6ac4;
             border-radius: 4px;
         }
+        .nav-link.active {
+            background-color: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -35,10 +39,10 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-white">Monochrome Security</a>
             <div class="hidden md:flex space-x-2 text-sm font-medium items-center">
-                <a href="#about" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="About" data-ja="私たちについて">About</a>
-                <a href="#services" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Services" data-ja="サービス">Services</a>
-                <a href="research.html" class="px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Research" data-ja="研究">Research</a>
-                <a href="#contact" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+                <a href="#about" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="About" data-ja="私たちについて">About</a>
+                <a href="#services" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Services" data-ja="サービス">Services</a>
+                <a href="#research" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Research" data-ja="研究">Research</a>
+                <a href="#contact" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
                 <button id="lang-toggle" class="ml-4 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
                     <span id="lang-text">日本語</span>
                 </button>
@@ -52,10 +56,10 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-black/70 backdrop-blur-sm shadow-lg py-4">
-            <a href="#about" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="About" data-ja="私たちについて">About</a>
-            <a href="#services" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Services" data-ja="サービス">Services</a>
-            <a href="research.html" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Research" data-ja="研究">Research</a>
-            <a href="#contact" class="block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
+            <a href="#about" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="About" data-ja="私たちについて">About</a>
+            <a href="#services" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Services" data-ja="サービス">Services</a>
+            <a href="#research" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Research" data-ja="研究">Research</a>
+            <a href="#contact" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
             <button id="mobile-lang-toggle" class="block mx-auto mt-2 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
                 <span id="mobile-lang-text">日本語</span>
             </button>
@@ -149,9 +153,62 @@
                 </div>
             </div>
         </section>
-        
+
+        <!-- Research & Publications Section -->
+        <section id="research" class="py-20 bg-black/20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-white" data-en="Research & Publications" data-ja="研究・公開情報">Research & Publications</h2>
+                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300" data-en="This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers." data-ja="このページでは、当社が発見したCVE（共通脆弱性情報）やその他のセキュリティ研究論文など、当社の公開研究を紹介します。">
+                    This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers.
+                </p>
+
+                <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Our Discovered CVEs" data-ja="当社が発見したCVE">Our Discovered CVEs</h3>
+                    <p class="text-gray-400 text-left mb-6" data-en="We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details." data-ja="セキュリティコミュニティへの貢献を誇りに思います。以下は、当社が責任を持って開示したCVEのリストと、詳細情報へのリンクです。">
+                        We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details.
+                    </p>
+                    <div class="space-y-4 text-left">
+                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-3897" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
+                            <h4 class="font-bold text-lg text-white">CVE-2025-3897</h4>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
+                        </a>
+                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-6588" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
+                            <h4 class="font-bold text-lg text-white">CVE-2025-6588</h4>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
+                        </a>
+                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12064" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
+                            <h4 class="font-bold text-lg text-white">CVE-2025-12064</h4>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
+                        </a>
+                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12078" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
+                            <h4 class="font-bold text-lg text-white">CVE-2025-12078</h4>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
+                        </a>
+                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12079" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
+                            <h4 class="font-bold text-lg text-white">CVE-2025-12079</h4>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Academic Research & Publications" data-ja="学術研究・公開情報">Academic Research & Publications</h3>
+                    <p class="text-gray-400 text-left mb-6" data-en="Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles." data-ja="当社チームは、深い研究を通じてサイバーセキュリティ分野の発展に貢献することを目指しています。以下は、当社が公開した論文や記事の一部へのリンクです。">
+                        Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles.
+                    </p>
+                    <div class="space-y-4 text-left">
+                        <a href="https://kth.diva-portal.org/smash/record.jsf?dswid=-9416&pid=diva2%3A1632105&c=1&searchType=SIMPLE&language=en&query=nicolai+hellesnes&af=%5B%5D&aq=%5B%5B%5D%5D&aq2=%5B%5B%5D%5D&aqe=%5B%5D&noOfRows=50&sortOrder=author_sort_asc&sortOrder2=title_sort_asc&onlyFullText=false&sf=all" class="p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300 block">
+                            <h4 class="font-bold text-lg text-white" data-en="Ethical Hacking of an IoT camera" data-ja="IoTカメラのエシカルハッキング">Ethical Hacking of an IoT camera</h4>
+                            <p class="text-sm text-gray-500" data-en="Published on KTH DiVA, 2022" data-ja="KTH DiVAで公開、2022年">Published on KTH DiVA, 2022</p>
+                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300 mt-2 inline-block" data-en="Read Paper &rarr;" data-ja="論文を読む &rarr;">Read Paper &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-black/20">
+        <section id="contact" class="py-20 bg-[#1a1a2e]">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</h2>
                 <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300" data-en="Ready to protect your business? Get in touch with our team today for a free consultation." data-ja="ビジネスを守る準備はできていますか？無料コンサルテーションのために、今すぐ当社チームにご連絡ください。">
@@ -179,11 +236,9 @@
     </footer>
 
     <script>
-        // Language switching functionality
         let currentLang = localStorage.getItem('language') || 'en';
 
         function updatePageLanguage() {
-            // Update all elements with language data attributes
             document.querySelectorAll('[data-en][data-ja]').forEach(element => {
                 const text = element.getAttribute(`data-${currentLang}`);
                 if (text) {
@@ -240,6 +295,37 @@
             mobileMenu.classList.toggle('hidden');
         });
 
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveNavLink() {
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 200;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 300;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPosition >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Update active link on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        // Update active link on page load
+        window.addEventListener('load', updateActiveNavLink);
+
         // Form submission with fetch API.
         const contactForm = document.getElementById('contact-form');
         const messageBox = document.getElementById('message-box');
@@ -255,7 +341,6 @@
             const formData = new FormData(contactForm);
 
             try {
-                // Submit the form data using the fetch API.
                 const response = await fetch(formAction, {
                     method: 'POST',
                     headers: {
