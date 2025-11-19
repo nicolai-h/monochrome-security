@@ -153,7 +153,10 @@
                 <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300" data-en="Ready to protect your business? Get in touch with our team today for a free consultation." data-ja="ビジネスを守る準備はできていますか？無料コンサルテーションのために、今すぐ当社チームにご連絡ください。">
                     Ready to protect your business? Get in touch with our team today for a free consultation.
                 </p>
-                <form id="contact-form" action="https://formsubmit.co/contact@monochromesecurity.com" method="POST" class="max-w-xl mx-auto space-y-4 relative">
+                <form id="contact-form" action="https://formsubmit.co/ajax/contact@monochromesecurity.com" method="POST" class="max-w-xl mx-auto space-y-4 relative">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
                     <input type="text" name="name" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Name" data-ja-placeholder="お名前" placeholder="Your Name">
                     <input type="email" name="email" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Email" data-ja-placeholder="メールアドレス" placeholder="Your Email">
                     <textarea name="message" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Message" data-ja-placeholder="メッセージ" placeholder="Your Message"></textarea>
@@ -252,16 +255,25 @@
                 const response = await fetch(formAction, {
                     method: 'POST',
                     headers: {
+                        'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    body: formData
+                    body: JSON.stringify({
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        message: formData.get('message'),
+                        _captcha: 'false',
+                        _template: 'table'
+                    })
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (response.ok && data.success) {
                     showMessage('Message sent successfully!', 'bg-green-500/20 text-green-300 border-green-500');
                     contactForm.reset();
                 } else {
-                    showMessage('Something went wrong. Please try again later.', 'bg-red-500/20 text-red-300 border-red-500');
+                    showMessage(data.message || 'Something went wrong. Please try again later.', 'bg-red-500/20 text-red-300 border-red-500');
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);
