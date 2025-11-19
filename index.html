@@ -30,6 +30,19 @@
             background-color: rgba(99, 102, 241, 0.2);
             color: #818cf8;
         }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -113,8 +126,77 @@
             </div>
         </section>
 
+        <!-- Brands Section -->
+        <section class="py-20 bg-[#1a1a2e] overflow-hidden">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Organizations Our Researchers Have Helped Secure" data-ja="当社研究者が保護を支援した組織">Organizations Our Researchers Have Helped Secure</h2>
+                <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300" data-en="Our security researchers have discovered and responsibly disclosed vulnerabilities across industry-leading platforms and organizations." data-ja="当社のセキュリティ研究者は、業界をリードするプラットフォームや組織全体で脆弱性を発見し、責任を持って開示してきました。">
+                    Our security researchers have discovered and responsibly disclosed vulnerabilities across industry-leading platforms and organizations.
+                </p>
+
+                <!-- Carousel Container -->
+                <div class="relative">
+                    <div class="flex overflow-hidden">
+                        <div class="flex animate-scroll">
+                            <!-- First set of logos -->
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/harman.svg" alt="Harman International" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Harman International</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/lv.svg" alt="Louis Vuitton" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Louis Vuitton</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/tag.svg" alt="TAG Heuer" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">TAG Heuer</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/datacamp.svg" alt="DataCamp" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">DataCamp</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/adobe.svg" alt="Adobe" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Adobe</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/vimeo.svg" alt="Vimeo" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Vimeo</div>
+                            </div>
+
+                            <!-- Duplicate set for seamless loop -->
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/harman.svg" alt="Harman International" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Harman International</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/lv.svg" alt="Louis Vuitton" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Louis Vuitton</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/tag.svg" alt="TAG Heuer" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">TAG Heuer</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/datacamp.svg" alt="DataCamp" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">DataCamp</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/adobe.svg" alt="Adobe" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Adobe</div>
+                            </div>
+                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
+                                <img src="logos/vimeo.svg" alt="Vimeo" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none;" class="text-gray-300 font-semibold">Vimeo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Services Section -->
-        <section id="services" class="py-20 bg-[#1a1a2e]">
+        <section id="services" class="py-20 bg-black/20">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Our Services" data-ja="サービス">Our Services</h2>
                 <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300" data-en="From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level." data-ja="積極的なテストからセキュリティ意識向上トレーニングまで、包括的なサービスでお客様のビジネスをあらゆるレベルで保護します。">
@@ -232,7 +314,10 @@
 
     <!-- Footer -->
     <footer class="bg-black/30 text-white/50 text-center py-8">
-        <p>2025 Monochrome Security.</p>
+        <p>
+            <span data-en="2025 Monochrome Security. Part of" data-ja="2025 Monochrome Security。">2025 Monochrome Security. Part of</span>
+            <a href="https://monochromesystems.com/" class="text-indigo-400 hover:text-indigo-300 transition duration-300" target="_blank" rel="noopener noreferrer">Monochrome Systems</a><span data-en="." data-ja="の一部です。">.</span>
+        </p>
     </footer>
 
     <script>
