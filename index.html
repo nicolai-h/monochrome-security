@@ -43,6 +43,137 @@
         .animate-scroll {
             animation: scroll 30s linear infinite;
         }
+
+        /* Space scene hero styles */
+        .hero-space {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(to bottom,
+                #0a0a1a 0%,
+                #0d1025 30%,
+                #111833 60%,
+                #0f1a35 100%
+            );
+            overflow: hidden;
+        }
+
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .four-point-star {
+            position: absolute;
+            top: 15%;
+            left: 12%;
+            width: 24px;
+            height: 24px;
+            filter: drop-shadow(0 0 8px rgba(200, 220, 255, 0.6));
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                opacity: 0.7;
+                filter: drop-shadow(0 0 6px rgba(200, 220, 255, 0.4));
+            }
+            50% {
+                opacity: 1;
+                filter: drop-shadow(0 0 12px rgba(200, 220, 255, 0.8));
+            }
+        }
+
+        .planet-horizon {
+            position: absolute;
+            bottom: -300px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200%;
+            max-width: 2400px;
+            height: 600px;
+            background: radial-gradient(ellipse at center top,
+                #0d1a2d 0%,
+                #080c18 50%,
+                #050608 100%
+            );
+            border-radius: 50% 50% 0 0;
+            box-shadow:
+                0 -2px 40px rgba(70, 130, 200, 0.15),
+                0 -4px 80px rgba(70, 130, 200, 0.1),
+                inset 0 2px 30px rgba(70, 130, 200, 0.05);
+        }
+
+        .planet-horizon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(100, 160, 220, 0.1) 20%,
+                rgba(120, 180, 240, 0.3) 50%,
+                rgba(100, 160, 220, 0.1) 80%,
+                transparent 100%
+            );
+            border-radius: 50% 50% 0 0;
+            filter: blur(2px);
+        }
+
+        .planet-horizon::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 10%;
+            right: 10%;
+            height: 40px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(80, 140, 200, 0.08) 30%,
+                rgba(100, 160, 220, 0.12) 50%,
+                rgba(80, 140, 200, 0.08) 70%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            filter: blur(15px);
+        }
+
+        .atmosphere-glow {
+            position: absolute;
+            bottom: 260px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 80px;
+            background: radial-gradient(ellipse at center bottom,
+                rgba(70, 130, 200, 0.15) 0%,
+                rgba(70, 130, 200, 0.05) 40%,
+                transparent 70%
+            );
+            filter: blur(20px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -80,11 +211,26 @@
     </header>
 
     <main class="pt-16">
-        <!-- Hero Section -->
-        <section class="bg-cover bg-center h-screen flex items-center" style="background-image: url('images/hero.png');">
-            <div class="container mx-auto px-6 text-center text-white bg-black/40 backdrop-blur-sm rounded-xl py-12">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4" data-en="Protecting the Digital World" data-ja="デジタル世界を守る">Protecting the Digital World</h1>
-                <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto" data-en="Expert cybersecurity consultancy services to safeguard your business from evolving threats." data-ja="進化する脅威からお客様のビジネスを守る専門的なサイバーセキュリティコンサルティングサービス。">
+        <!-- Hero Section - Space Scene -->
+        <section class="hero-space flex items-center">
+            <!-- Stars Container -->
+            <div class="stars-container" id="stars-container"></div>
+
+            <!-- Four-point star in top-left -->
+            <svg class="four-point-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="rgba(200, 220, 255, 0.9)"/>
+            </svg>
+
+            <!-- Atmosphere glow -->
+            <div class="atmosphere-glow"></div>
+
+            <!-- Planet horizon -->
+            <div class="planet-horizon"></div>
+
+            <!-- Hero Content -->
+            <div class="hero-content container mx-auto px-6 text-center text-white">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6" data-en="Protecting the Digital World" data-ja="デジタル世界を守る">Protecting the Digital World</h1>
+                <p class="text-lg sm:text-xl mb-10 max-w-2xl mx-auto text-gray-300" data-en="Expert cybersecurity consultancy services to safeguard your business from evolving threats." data-ja="進化する脅威からお客様のビジネスを守る専門的なサイバーセキュリティコンサルティングサービス。">
                     Expert cybersecurity consultancy services to safeguard your business from evolving threats.
                 </p>
                 <a href="#services" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105" data-en="Explore Our Services" data-ja="サービスを見る">
@@ -358,9 +504,40 @@
             updatePageLanguage();
         }
 
+        // Generate stars for the space scene
+        function generateStars() {
+            const starsContainer = document.getElementById('stars-container');
+            if (!starsContainer) return;
+
+            const starCount = 120;
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 75 + '%'; // Keep stars in upper 75% (above planet)
+
+                // Random size (1-3px)
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+
+                // Random animation delay and duration for natural twinkling
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+
+                // Random initial opacity
+                star.style.opacity = Math.random() * 0.5 + 0.3;
+
+                starsContainer.appendChild(star);
+            }
+        }
+
         // Initialize page with saved language on load
         document.addEventListener('DOMContentLoaded', () => {
             updatePageLanguage();
+            generateStars();
 
             // Add event listeners for language toggle buttons
             document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
