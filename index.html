@@ -1,663 +1,1252 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monochrome Security - Your Partner in Digital Security</title>
+    <title>Monochrome Security</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --transition-speed: 300ms;
+            --hero-image: url('images/hero.png');
+            --bg: #f8f7f5;
+            --bg-alt: #ffffff;
+            --text: #1a1a1a;
+            --text-mid: rgba(30, 30, 30, 0.6);
+            --text-light: rgba(30, 30, 30, 0.35);
+            --text-faint: rgba(30, 30, 30, 0.18);
+            --border: rgba(30, 30, 30, 0.08);
+            --border-hover: rgba(30, 30, 30, 0.16);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a1a2e;
-            color: #e0e0e0;
+            background-color: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(30,30,30,0.15); border-radius: 3px; }
+
+        /* ─── HEADER ─── */
+        .site-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 56px;
+            background: rgba(248, 247, 245, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transform: translateY(0);
         }
-        ::-webkit-scrollbar-track {
-            background: #2a2a44;
+
+        .header-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: 0.04em;
         }
-        ::-webkit-scrollbar-thumb {
-            background-color: #5c6ac4;
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header-nav a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .header-nav a:hover { color: var(--text); }
+
+        .lang-btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            background: none;
+            border: 1px solid var(--border);
             border-radius: 4px;
-        }
-        .nav-link.active {
-            background-color: rgba(99, 102, 241, 0.2);
-            color: #818cf8;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            padding: 4px 12px;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: color var(--transition-speed), border-color var(--transition-speed);
         }
 
-        .animate-scroll {
-            animation: scroll 30s linear infinite;
+        .lang-btn:hover { color: var(--text); border-color: var(--border-hover); }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-mid);
+            cursor: pointer;
+            padding: 4px;
         }
 
-        /* Space scene hero styles */
-        .hero-space {
-            position: relative;
-            min-height: 100vh;
-            background: linear-gradient(to bottom,
-                #0a0a1a 0%,
-                #0d1025 30%,
-                #111833 60%,
-                #0f1a35 100%
-            );
-            overflow: hidden;
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 56px; left: 0; right: 0;
+            background: rgba(248, 247, 245, 0.97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 49;
+            padding: 24px 0;
+            box-shadow: 0 1px 0 var(--border);
         }
 
-        .stars-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .mobile-menu.open { display: block; }
+
+        .mobile-menu a, .mobile-menu button {
+            display: block;
             width: 100%;
-            height: 100%;
+            text-align: center;
+            padding: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--text-mid);
+            text-decoration: none;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: color var(--transition-speed);
+        }
+
+        .mobile-menu a:hover, .mobile-menu button:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            .site-header { padding: 16px 24px; }
+            .header-nav { display: none; }
+            .menu-btn { display: block; }
+        }
+
+        /* ─── HERO ─── */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .hero-grid-layer {
+            position: absolute; inset: 0;
+            z-index: 1;
+            pointer-events: none;
             overflow: hidden;
         }
 
-        .star {
+        .hero-grid-layer canvas { width: 100%; height: 100%; }
+
+        .hero-image-base {
+            position: absolute; inset: 0;
+            z-index: 2;
+            background: var(--hero-image) center/cover no-repeat;
+            will-change: transform;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hero-image-base {
+            filter: grayscale(100%) brightness(0.35) contrast(1.1);
+            opacity: 0;
+        }
+
+
+        .hero-vignette {
+            position: absolute; inset: 0;
+            z-index: 8;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(248,247,245,0.7) 100%);
+        }
+
+
+        /* Hero UI */
+        .hero-brand {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .four-point-star {
-            position: absolute;
-            top: 15%;
-            left: 12%;
-            width: 24px;
-            height: 24px;
-            filter: drop-shadow(0 0 8px rgba(200, 220, 255, 0.6));
-            animation: glow-pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% {
-                opacity: 0.7;
-                filter: drop-shadow(0 0 6px rgba(200, 220, 255, 0.4));
-            }
-            50% {
-                opacity: 1;
-                filter: drop-shadow(0 0 12px rgba(200, 220, 255, 0.8));
-            }
-        }
-
-        .planet-horizon {
-            position: absolute;
-            bottom: -300px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200%;
-            max-width: 2400px;
-            height: 600px;
-            background: radial-gradient(ellipse at center top,
-                #0d1a2d 0%,
-                #080c18 50%,
-                #050608 100%
-            );
-            border-radius: 50% 50% 0 0;
-            box-shadow:
-                0 -2px 40px rgba(70, 130, 200, 0.15),
-                0 -4px 80px rgba(70, 130, 200, 0.1),
-                inset 0 2px 30px rgba(70, 130, 200, 0.05);
-        }
-
-        .planet-horizon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(100, 160, 220, 0.1) 20%,
-                rgba(120, 180, 240, 0.3) 50%,
-                rgba(100, 160, 220, 0.1) 80%,
-                transparent 100%
-            );
-            border-radius: 50% 50% 0 0;
-            filter: blur(2px);
-        }
-
-        .planet-horizon::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 10%;
-            right: 10%;
-            height: 40px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(80, 140, 200, 0.08) 30%,
-                rgba(100, 160, 220, 0.12) 50%,
-                rgba(80, 140, 200, 0.08) 70%,
-                transparent 100%
-            );
-            border-radius: 50%;
-            filter: blur(15px);
-        }
-
-        .atmosphere-glow {
-            position: absolute;
-            bottom: 260px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120%;
-            height: 80px;
-            background: radial-gradient(ellipse at center bottom,
-                rgba(70, 130, 200, 0.15) 0%,
-                rgba(70, 130, 200, 0.05) 40%,
-                transparent 70%
-            );
-            filter: blur(20px);
-        }
-
-        .hero-content {
-            position: relative;
+            top: 100px; left: 56px;
             z-index: 10;
+            will-change: transform;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hero-brand h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 3.5vw, 3.6rem);
+            color: var(--text);
+            letter-spacing: 0.04em;
+            line-height: 1.15;
+        }
+
+        .hero-brand-sub {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: clamp(0.85rem, 1.1vw, 1.1rem);
+            color: var(--text-light);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        .hero-center {
+            position: absolute;
+            top: 54%; left: 56px;
+            transform: translateY(-50%);
+            z-index: 10;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .hero-tagline-wrap {
+            position: absolute;
+            top: 38%;
+            left: 0; right: 0;
+            z-index: 10;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 0.4s;
+        }
+        .hero-tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+            color: var(--text);
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .hero-headline {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+            color: var(--text-mid);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--bg);
+            background: var(--text);
+            border-radius: 100px;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-cta:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+        .hero-cta:active { transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero-tagline-wrap { top: 35%; padding: 0 24px; }
+            .hero-center { top: 50%; left: 24px; right: 24px; max-width: none; }
+        }
+
+        .hero-bottom {
+            position: absolute;
+            bottom: 44px; left: 56px; right: 56px;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            will-change: transform;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hero-scroll-hint {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.78rem;
+            color: var(--text-faint);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .hero-scroll-hint:hover { color: var(--text-mid); }
+
+        .hero-scroll-line {
+            width: 40px; height: 1px;
+            background: rgba(30,30,30,0.15);
+        }
+
+        /* Hero load animation */
+        .hero-brand, .hero-bottom, .hero-image-base {
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+        }
+        .hero-brand      { animation-delay: 0.3s; }
+        .hero-bottom      { animation-delay: 0.5s; }
+        .hero-image-base  { animation-name: fadeInBase; animation-delay: 0.1s; }
+
+        @keyframes fadeIn     { to { opacity: 1; } }
+        @keyframes fadeInBase { to { opacity: 0.18; } }
+
+        @media (max-width: 768px) {
+            .hero-brand { top: 90px; left: 24px; }
+            .hero-bottom { left: 24px; right: 24px; bottom: 32px; }
+        }
+
+        /* ─── CONTENT SECTIONS ─── */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-alt {
+            background: var(--bg-alt);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 56px;
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 80px 0; }
+            .container { padding: 0 24px; }
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+            color: var(--text-mid);
+            line-height: 1.7;
+            max-width: 680px;
+        }
+
+        .section-desc.center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 56px;
+        }
+
+        @media (max-width: 768px) {
+            .card-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 36px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .section-alt .card { background: var(--bg); }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.06);
+        }
+
+        .card-icon {
+            width: 44px; height: 44px;
+            padding: 10px;
+            color: var(--text);
+            background: rgba(30, 30, 30, 0.05);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.35rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.65;
+        }
+
+        /* Logo carousel */
+        @keyframes scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .logo-track {
+            display: flex;
+            animation: scroll 18s linear infinite;
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            margin: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 96px;
+            width: 192px;
+        }
+
+        .logo-item img {
+            max-height: 64px;
+            max-width: 100%;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .logo-item img:hover { opacity: 1; }
+
+        @media (max-width: 768px) {
+            .logo-item { width: 140px; height: 72px; margin: 0 20px; }
+            .logo-item img { max-height: 48px; }
+        }
+
+        .logo-item .logo-fallback {
+            display: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            letter-spacing: 0.06em;
+        }
+
+        /* CVE / Research list */
+        .research-block {
+            margin-top: 64px;
+        }
+
+        .research-block h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .research-block > p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-mid);
+            line-height: 1.65;
+            margin-bottom: 28px;
+        }
+
+        .cve-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: border-color 0.3s;
+        }
+
+        .cve-item:first-child { border-top: 1px solid var(--border); }
+        .cve-item:hover { border-color: var(--border-hover); }
+
+        .cve-item h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+            letter-spacing: 0.02em;
+        }
+
+        .cve-item span {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            letter-spacing: 0.08em;
+            transition: color 0.3s;
+        }
+
+        .cve-item:hover span { color: var(--text); }
+
+        .paper-item {
+            display: block;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: border-color 0.3s;
+        }
+
+        .paper-item:first-child { border-top: 1px solid var(--border); }
+        .paper-item:hover { border-color: var(--border-hover); }
+
+        .paper-item h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .paper-item .meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .paper-item .link-text {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            letter-spacing: 0.08em;
+            transition: color 0.3s;
+        }
+
+        .paper-item:hover .link-text { color: var(--text); }
+
+        /* Contact form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 48px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        .contact-info p {
+            font-size: 1.05rem;
+            color: var(--text-mid);
+            line-height: 1.7;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+        .contact-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .contact-input::placeholder { color: var(--text-light); }
+        .contact-input:focus { border-color: var(--border-hover); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            border-radius: 100px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+        .submit-btn:active { transform: translateY(0); }
+
+        .form-message {
+            display: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: opacity 0.5s;
+        }
+
+        .form-message.success {
+            display: block;
+            background: rgba(34, 120, 80, 0.08);
+            color: rgba(34, 120, 80, 0.8);
+            border: 1px solid rgba(34, 120, 80, 0.12);
+        }
+
+        .form-message.error {
+            display: block;
+            background: rgba(180, 40, 40, 0.08);
+            color: rgba(180, 40, 40, 0.8);
+            border: 1px solid rgba(180, 40, 40, 0.12);
+        }
+
+        /* Footer */
+        .site-footer {
+            padding: 48px 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .site-footer p, .site-footer a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .site-footer a {
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .site-footer a:hover { color: var(--text); }
+
+        @media (max-width: 768px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 8px;
+                padding: 32px 24px;
+                text-align: center;
+            }
+        }
+
+        /* Separator */
+        .section-sep {
+            width: 48px;
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 24px;
+        }
+
+        .center .section-sep, .text-center .section-sep {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero accent blob */
+        .hero-blob {
+            position: absolute;
+            width: 500px; height: 500px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(30,30,30,0.06) 0%, transparent 70%);
+            animation: blobPulse 7s ease-in-out infinite;
+        }
+
+        @keyframes blobPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-blob { width: 300px; height: 300px; }
+        }
+
+        /* Touch fallback */
+        @media (hover: none) and (pointer: coarse) {
+            .hero-image-base {
+                filter: grayscale(60%) brightness(0.5) contrast(1.05);
+                opacity: 0.25 !important;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
 
-    <!-- Header & Navigation -->
-    <header class="bg-black/30 backdrop-blur-sm fixed w-full z-50 shadow-md">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white">Monochrome Security</a>
-            <div class="hidden md:flex space-x-2 text-sm font-medium items-center">
-                <a href="#about" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="About" data-ja="私たちについて">About</a>
-                <a href="#services" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Services" data-ja="サービス">Services</a>
-                <a href="#research" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Research" data-ja="研究">Research</a>
-                <a href="#contact" class="nav-link px-4 py-2 rounded-full transition duration-300 hover:bg-white/10" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
-                <button id="lang-toggle" class="ml-4 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
-                    <span id="lang-text">日本語</span>
-                </button>
-            </div>
-            <!-- Mobile Menu Button -->
-            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
+<body>
+
+    <!-- ─── HEADER ─── -->
+    <header class="site-header" id="siteHeader">
+        <a href="#" class="header-brand">Monochrome Security</a>
+        <nav class="header-nav">
+            <a href="#about" data-en="About" data-ja="私たちについて">About</a>
+            <a href="#services" data-en="Services" data-ja="サービス">Services</a>
+            <a href="#research" data-en="Research" data-ja="研究">Research</a>
+            <a href="#contact" data-en="Contact" data-ja="お問い合わせ">Contact</a>
+            <button class="lang-btn" id="langToggle"><span id="langText">日本語</span></button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-black/70 backdrop-blur-sm shadow-lg py-4">
-            <a href="#about" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="About" data-ja="私たちについて">About</a>
-            <a href="#services" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Services" data-ja="サービス">Services</a>
-            <a href="#research" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Research" data-ja="研究">Research</a>
-            <a href="#contact" class="nav-link block text-center py-2 text-white hover:bg-gray-700 transition duration-300" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</a>
-            <button id="mobile-lang-toggle" class="block mx-auto mt-2 px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded transition duration-300">
-                <span id="mobile-lang-text">日本語</span>
-            </button>
-        </div>
+        <button class="menu-btn" id="menuToggle" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="10" y1="17" x2="20" y2="17"/>
+            </svg>
+        </button>
     </header>
 
-    <main class="pt-16">
-        <!-- Hero Section - Space Scene -->
-        <section class="hero-space flex items-center">
-            <!-- Stars Container -->
-            <div class="stars-container" id="stars-container"></div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" data-en="About" data-ja="私たちについて">About</a>
+        <a href="#services" data-en="Services" data-ja="サービス">Services</a>
+        <a href="#research" data-en="Research" data-ja="研究">Research</a>
+        <a href="#contact" data-en="Contact" data-ja="お問い合わせ">Contact</a>
+        <button class="lang-btn" id="mobileLangToggle"><span id="mobileLangText">日本語</span></button>
+    </div>
 
-            <!-- Four-point star in top-left -->
-            <svg class="four-point-star" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z" fill="rgba(200, 220, 255, 0.9)"/>
-            </svg>
+    <main>
+        <!-- ─── HERO ─── -->
+        <section class="hero-section" id="heroSection">
+            <div class="hero-grid-layer"><canvas id="gridCanvas"></canvas></div>
+            <div class="hero-image-base" id="heroImageBase"></div>
+            <div class="hero-blob"></div>
+            <div class="hero-vignette"></div>
 
-            <!-- Atmosphere glow -->
-            <div class="atmosphere-glow"></div>
+            <div class="hero-brand" id="heroBrand">
+                <h1>Monochrome<br>Security</h1>
+                <div class="hero-brand-sub">Security &middot; Engineering &middot; Research</div>
+            </div>
 
-            <!-- Planet horizon -->
-            <div class="planet-horizon"></div>
+            <div class="hero-tagline-wrap">
+                <h2 class="hero-tagline" data-en="Protecting the Digital World" data-ja="デジタル世界を守る">Protecting the Digital World</h2>
+            </div>
 
-            <!-- Hero Content -->
-            <div class="hero-content container mx-auto px-6 text-center text-white">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6" data-en="Protecting the Digital World" data-ja="デジタル世界を守る">Protecting the Digital World</h1>
-                <p class="text-lg sm:text-xl mb-10 max-w-2xl mx-auto text-gray-300" data-en="Expert cybersecurity consultancy services to safeguard your business from evolving threats." data-ja="進化する脅威からお客様のビジネスを守る専門的なサイバーセキュリティコンサルティングサービス。">
-                    Expert cybersecurity consultancy services to safeguard your business from evolving threats.
-                </p>
-                <a href="#services" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105" data-en="Explore Our Services" data-ja="サービスを見る">
-                    Explore Our Services
+            <div class="hero-center" id="heroCenter">
+                <p class="hero-headline" data-en="Proactive cybersecurity consulting.<br>Penetration testing, threat modeling &amp; vulnerability research." data-ja="積極的なサイバーセキュリティコンサルティング。<br>ペネトレーションテスト、脅威モデリング、脆弱性研究。">Proactive cybersecurity consulting.<br>Penetration testing, threat modeling &amp; vulnerability research.</p>
+                <a href="#contact" class="hero-cta" data-en="Get in Touch" data-ja="お問い合わせ">Get in Touch</a>
+            </div>
+
+            <div class="hero-bottom" id="heroBottom">
+                <div></div>
+                <a href="#about" class="hero-scroll-hint">
+                    <span class="hero-scroll-line"></span>
+                    <span data-en="Explore" data-ja="探索する">Explore</span>
                 </a>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-20 bg-black/20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Who We Are" data-ja="私たちについて">Who We Are</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300" data-en="Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the complex threat landscape. Our team of brings skill & experience in penetration testing, threat modeling, and security awareness training to deliver proactive and robust security solutions. We believe that security is not just a technology issue, but a business enabler." data-ja="Monochrome Securityは、複雑な脅威環境をナビゲートするお客様をサポートする、サイバーセキュリティ分野のリーディングカンパニーです。当社のチームは、ペネトレーションテスト、脅威モデリング、セキュリティ意識向上トレーニングにおけるスキルと経験を持ち、積極的で堅牢なセキュリティソリューションを提供します。セキュリティは単なる技術的な問題ではなく、ビジネスを可能にするものだと私たちは信じています。">
-                    Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the complex threat landscape. Our team of brings skill & experience in penetration testing, threat modeling, and security awareness training to deliver proactive and robust security solutions. We believe that security is not just a technology issue, but a business enabler.
+        <!-- ─── ABOUT ─── -->
+        <section id="about" class="section">
+            <div class="container reveal" style="text-align:center">
+                <div class="section-label" data-en="About Us" data-ja="私たちについて">About Us</div>
+                <h2 class="section-title" data-en="Who We Are" data-ja="私たちについて">Who We Are</h2>
+                <div class="section-sep" style="margin:0 auto 20px"></div>
+                <p class="section-desc center"
+                    data-en="Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the complex threat landscape. Our team brings skill and experience in penetration testing, threat modeling, and security awareness training to deliver proactive and robust security solutions."
+                    data-ja="Monochrome Securityは、複雑な脅威環境をナビゲートするお客様をサポートする、サイバーセキュリティ分野のリーディングカンパニーです。当社のチームは、ペネトレーションテスト、脅威モデリング、セキュリティ意識向上トレーニングにおけるスキルと経験を持ち、積極的で堅牢なセキュリティソリューションを提供します。">
+                    Monochrome Security is a leading cybersecurity firm dedicated to helping businesses navigate the
+                    complex threat landscape. Our team brings skill and experience in penetration testing, threat
+                    modeling, and security awareness training to deliver proactive and robust security solutions.
                 </p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
-                        <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+                <div class="card-grid">
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="5"/>
+                            <path d="M8.5 12.5L7 21l5-2.5 5 2.5-1.5-8.5"/>
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Proven Track Record" data-ja="確かな実績">Proven Track Record</h3>
-                        <p class="text-gray-400" data-en="Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background." data-ja="当社の作業には、複数のCVE公開やサイバーセキュリティの学術研究が含まれ、実用的な脆弱性発見と強固な研究背景を組み合わせています。">Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background.</p>
+                        <h3 data-en="Proven Track Record" data-ja="確かな実績">Proven Track Record</h3>
+                        <p data-en="Our work includes publishing multiple CVEs and conducting academic research in cybersecurity, combining practical vulnerability discovery with a strong research background."
+                           data-ja="当社の作業には、複数のCVE公開やサイバーセキュリティの学術研究が含まれ、実用的な脆弱性発見と強固な研究背景を組み合わせています。">Our work includes publishing multiple CVEs and conducting academic research, combining practical vulnerability discovery with a strong research background.</p>
                     </div>
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
-                        <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3l7 4v5c0 5-3 9-7 11-4-2-7-6-7-11V7l7-4z"/>
+                            <rect x="10" y="11" width="4" height="3.5" rx="0.5"/>
+                            <path d="M10 11v-1.5a2 2 0 014 0V11"/>
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Proactive Defense" data-ja="積極的防御">Proactive Defense</h3>
-                        <p class="text-gray-400" data-en="We focus on proactive security measures to prevent breaches before they happen, saving you time and money." data-ja="セキュリティ侵害が発生する前に防止する積極的なセキュリティ対策に焦点を当て、お客様の時間とコストを節約します。">We focus on proactive security measures to prevent breaches before they happen, saving you time and money.</p>
+                        <h3 data-en="Proactive Defense" data-ja="積極的防御">Proactive Defense</h3>
+                        <p data-en="We focus on proactive security measures to prevent breaches before they happen, saving you time and money."
+                           data-ja="セキュリティ侵害が発生する前に防止する積極的なセキュリティ対策に焦点を当て、お客様の時間とコストを節約します。">We focus on proactive security measures to prevent breaches before they happen, saving you time and money.</p>
                     </div>
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
-                        <svg class="h-12 w-12 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18v-9m0-9c-1.657 0-3 4.03-3 9s1.343 9 3 9m-9-9h9" />
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="7" x2="20" y2="7"/>
+                            <line x1="4" y1="12" x2="20" y2="12"/>
+                            <line x1="4" y1="17" x2="20" y2="17"/>
+                            <circle cx="8" cy="7" r="2" fill="currentColor"/>
+                            <circle cx="16" cy="12" r="2" fill="currentColor"/>
+                            <circle cx="11" cy="17" r="2" fill="currentColor"/>
                         </svg>
-                        <h3 class="text-xl font-bold mb-2 text-white" data-en="Tailored Solutions" data-ja="カストマイズソリューション">Tailored Solutions</h3>
-                        <p class="text-gray-400" data-en="Every business is unique. We provide customized security strategies that fit your specific needs and budget." data-ja="すべてのビジネスはユニークです。お客様の特定のニーズと予算に合わせたカスタマイズされたセキュリティ戦略を提供します。">Every business is unique. We provide customized security strategies that fit your specific needs and budget.</p>
+                        <h3 data-en="Tailored Solutions" data-ja="カスタマイズソリューション">Tailored Solutions</h3>
+                        <p data-en="Every business is unique. We provide customized security strategies that fit your specific needs and budget."
+                           data-ja="すべてのビジネスはユニークです。お客様の特定のニーズと予算に合わせたカスタマイズされたセキュリティ戦略を提供します。">Every business is unique. We provide customized security strategies that fit your specific needs and budget.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Brands Section -->
-        <section class="py-20 bg-[#1a1a2e] overflow-hidden">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Organizations Our Researchers Have Helped Secure" data-ja="当社研究者が保護を支援した組織">Organizations Our Researchers Have Helped Secure</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300" data-en="Our security researchers have discovered and responsibly disclosed vulnerabilities across industry-leading platforms and organizations." data-ja="当社のセキュリティ研究者は、業界をリードするプラットフォームや組織全体で脆弱性を発見し、責任を持って開示してきました。">
-                    Our security researchers have discovered and responsibly disclosed vulnerabilities across industry-leading platforms and organizations.
-                </p>
+        <!-- ─── BRANDS ─── -->
+        <section class="section section-alt" style="padding: 80px 0;">
+            <div class="container reveal" style="text-align:center">
+                <div class="section-label" data-en="Trusted By" data-ja="信頼されるパートナー">Trusted By</div>
+                <h2 class="section-title" style="font-size:clamp(1.4rem,2vw,2rem);margin-bottom:48px"
+                    data-en="Organizations Our Researchers Have Helped Secure"
+                    data-ja="当社研究者が保護を支援した組織">Organizations Our Researchers Have Helped Secure</h2>
 
-                <!-- Carousel Container -->
-                <div class="relative">
-                    <div class="flex overflow-hidden">
-                        <div class="flex animate-scroll">
-                            <!-- First set of logos -->
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/harman.svg" alt="Harman International" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Harman International</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/lv.svg" alt="Louis Vuitton" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Louis Vuitton</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/tag.svg" alt="TAG Heuer" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">TAG Heuer</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/datacamp.svg" alt="DataCamp" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">DataCamp</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/adobe.svg" alt="Adobe" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Adobe</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/vimeo.svg" alt="Vimeo" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Vimeo</div>
-                            </div>
-
-                            <!-- Duplicate set for seamless loop -->
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/harman.svg" alt="Harman International" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Harman International</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/lv.svg" alt="Louis Vuitton" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Louis Vuitton</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/tag.svg" alt="TAG Heuer" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">TAG Heuer</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/datacamp.svg" alt="DataCamp" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">DataCamp</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/adobe.svg" alt="Adobe" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Adobe</div>
-                            </div>
-                            <div class="flex-shrink-0 mx-8 flex items-center justify-center h-24 w-48">
-                                <img src="logos/vimeo.svg" alt="Vimeo" class="max-h-16 max-w-full object-contain opacity-70 hover:opacity-100 transition duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                <div style="display:none;" class="text-gray-300 font-semibold">Vimeo</div>
-                            </div>
-                        </div>
+                <div style="overflow:hidden">
+                    <div class="logo-track">
+                        <div class="logo-item"><img src="logos/harman.svg" alt="Harman" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Harman</span></div>
+                        <div class="logo-item"><img src="logos/lv.svg" alt="Louis Vuitton" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Louis Vuitton</span></div>
+                        <div class="logo-item"><img src="logos/tag.svg" alt="TAG Heuer" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">TAG Heuer</span></div>
+                        <div class="logo-item"><img src="logos/datacamp.svg" alt="DataCamp" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">DataCamp</span></div>
+                        <div class="logo-item"><img src="logos/adobe.svg" alt="Adobe" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Adobe</span></div>
+                        <div class="logo-item"><img src="logos/vimeo.svg" alt="Vimeo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Vimeo</span></div>
+                        <div class="logo-item"><img src="logos/harman.svg" alt="Harman" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Harman</span></div>
+                        <div class="logo-item"><img src="logos/lv.svg" alt="Louis Vuitton" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Louis Vuitton</span></div>
+                        <div class="logo-item"><img src="logos/tag.svg" alt="TAG Heuer" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">TAG Heuer</span></div>
+                        <div class="logo-item"><img src="logos/datacamp.svg" alt="DataCamp" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">DataCamp</span></div>
+                        <div class="logo-item"><img src="logos/adobe.svg" alt="Adobe" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Adobe</span></div>
+                        <div class="logo-item"><img src="logos/vimeo.svg" alt="Vimeo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">Vimeo</span></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section id="services" class="py-20 bg-black/20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Our Services" data-ja="サービス">Our Services</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-12 text-gray-300" data-en="From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level." data-ja="積極的なテストからセキュリティ意識向上トレーニングまで、包括的なサービスでお客様のビジネスをあらゆるレベルで保護します。">
+        <!-- ─── SERVICES ─── -->
+        <section id="services" class="section">
+            <div class="container reveal" style="text-align:center">
+                <div class="section-label" data-en="What We Do" data-ja="サービス内容">What We Do</div>
+                <h2 class="section-title" data-en="Our Services" data-ja="サービス">Our Services</h2>
+                <div class="section-sep" style="margin:0 auto 20px"></div>
+                <p class="section-desc center"
+                    data-en="From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level."
+                    data-ja="積極的なテストからセキュリティ意識向上トレーニングまで、包括的なサービスでお客様のビジネスをあらゆるレベルで保護します。">
                     From proactive testing to security awareness training, our comprehensive services ensure your business is protected at every level.
                 </p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg border border-indigo-500/20">
-                        <svg class="h-16 w-16 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2 L20 6 V12 C20 17 16 22 12 22 C8 22 4 17 4 12 V6 L12 2 Z" />
+
+                <div class="card-grid">
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="18" rx="2"/>
+                            <polyline points="6 9 10 12 6 15"/>
+                            <line x1="13" y1="15" x2="18" y2="15"/>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Penetration Testing" data-ja="ペネトレーションテスト">Penetration Testing</h3>
-                        <p class="text-gray-400" data-en="Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do." data-ja="ハッカーよりも先にWebアプリケーション、ネットワーク、モバイルアプリの脆弱性を発見・修正するために、現実的な攻撃をシミュレートします。">
-                            Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do.
-                        </p>
+                        <h3 data-en="Penetration Testing" data-ja="ペネトレーションテスト">Penetration Testing</h3>
+                        <p data-en="Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do."
+                           data-ja="ハッカーよりも先にWebアプリケーション、ネットワーク、モバイルアプリの脆弱性を発見・修正するために、現実的な攻撃をシミュレートします。">Simulate real-world attacks to find and fix vulnerabilities in your web applications, networks, and mobile apps before hackers do.</p>
                     </div>
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg border border-indigo-500/20">
-                        <svg class="h-16 w-16 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2L2 8l10 6 10-6-10-6z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 9v4a8 8 0 008 8 8 8 0 008-8V9" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v6" />
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 8l-10 5L2 8l10-5 10 5z"/>
+                            <path d="M6 10.5v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>
+                            <line x1="22" y1="8" x2="22" y2="14"/>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Security Awareness Training" data-ja="セキュリティ意識向上トレーニング">Security Awareness Training</h3>
-                        <p class="text-gray-400" data-en="Empower your employees to be your first line of defense with our interactive and engaging security training programs." data-ja="インタラクティブで魅力的なセキュリティトレーニングプログラムで、従業員を最初の防衛線に育成します。">
-                            Empower your employees to be your first line of defense with our interactive and engaging security training programs.
-                        </p>
+                        <h3 data-en="Security Awareness Training" data-ja="セキュリティ意識向上トレーニング">Security Awareness Training</h3>
+                        <p data-en="Empower your employees to be your first line of defense with our interactive and engaging security training programs."
+                           data-ja="インタラクティブで魅力的なセキュリティトレーニングプログラムで、従業員を最初の防衛線に育成します。">Empower your employees to be your first line of defense with our interactive and engaging security training programs.</p>
                     </div>
-                    <div class="bg-black/30 p-8 rounded-xl shadow-lg border border-indigo-500/20">
-                        <svg class="h-16 w-16 text-indigo-400 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    <div class="card">
+                        <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="10" cy="10" r="7"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                            <path d="M7 13v-3"/>
+                            <path d="M10 13v-5"/>
+                            <path d="M13 13v-2"/>
                         </svg>
-                        <h3 class="text-2xl font-bold mb-2 text-white" data-en="Cyber Risk Assessment" data-ja="サイバーリスク評価">Cyber Risk Assessment</h3>
-                        <p class="text-gray-400" data-en="Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture." data-ja="組織のセキュリティリスクを特定・優先順位つけし、より強固なセキュリティ体制のための戦略的ロードマップを構築します。">
-                            Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture.
-                        </p>
+                        <h3 data-en="Cyber Risk Assessment" data-ja="サイバーリスク評価">Cyber Risk Assessment</h3>
+                        <p data-en="Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture."
+                           data-ja="組織のセキュリティリスクを特定・優先順位つけし、より強固なセキュリティ体制のための戦略的ロードマップを構築します。">Identify and prioritize your organization's security risks to build a strategic roadmap for a stronger security posture.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Research & Publications Section -->
-        <section id="research" class="py-20 bg-black/20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold mb-4 text-white" data-en="Research & Publications" data-ja="研究・公開情報">Research & Publications</h2>
-                <p class="text-lg max-w-3xl mx-auto mb-8 text-gray-300" data-en="This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers." data-ja="このページでは、当社が発見したCVE（共通脆弱性情報）やその他のセキュリティ研究論文など、当社の公開研究を紹介します。">
-                    This page showcases our public research, including Common Vulnerabilities and Exposures (CVEs) we have discovered and other security research papers.
-                </p>
-
-                <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
-                    <h3 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Our Discovered CVEs" data-ja="当社が発見したCVE">Our Discovered CVEs</h3>
-                    <p class="text-gray-400 text-left mb-6" data-en="We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details." data-ja="セキュリティコミュニティへの貢献を誇りに思います。以下は、当社が責任を持って開示したCVEのリストと、詳細情報へのリンクです。">
-                        We are proud of our contributions to the security community. The following is a list of CVEs we have responsibly disclosed, along with links to more details.
+        <!-- ─── RESEARCH ─── -->
+        <section id="research" class="section section-alt">
+            <div class="container reveal">
+                <div style="text-align:center">
+                    <div class="section-label" data-en="Research" data-ja="研究">Research</div>
+                    <h2 class="section-title" data-en="Research &amp; Publications" data-ja="研究・公開情報">Research &amp; Publications</h2>
+                    <div class="section-sep" style="margin:0 auto 20px"></div>
+                    <p class="section-desc center"
+                        data-en="Our public research, including Common Vulnerabilities and Exposures we have discovered and security research papers."
+                        data-ja="当社が発見したCVEやセキュリティ研究論文など、当社の公開研究を紹介します。">
+                        Our public research, including Common Vulnerabilities and Exposures we have discovered and security research papers.
                     </p>
-                    <div class="space-y-4 text-left">
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-3897" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-3897</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-6588" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-6588</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12064" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-12064</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12078" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-12078</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12079" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-12079</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-11263" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-11263</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12076" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-12076</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                        <a href="https://www.cve.org/CVERecord?id=CVE-2025-12077" class="flex justify-between items-center p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300">
-                            <h4 class="font-bold text-lg text-white">CVE-2025-12077</h4>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300" data-en="View Details &rarr;" data-ja="詳細を見る &rarr;">View Details &rarr;</span>
-                        </a>
-                    </div>
                 </div>
 
-                <div class="bg-black/30 p-8 rounded-xl shadow-lg transition duration-300 mt-12">
-                    <h3 class="text-2xl font-semibold mb-6 text-white text-left" data-en="Academic Research & Publications" data-ja="学術研究・公開情報">Academic Research & Publications</h3>
-                    <p class="text-gray-400 text-left mb-6" data-en="Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles." data-ja="当社チームは、深い研究を通じてサイバーセキュリティ分野の発展に貢献することを目指しています。以下は、当社が公開した論文や記事の一部へのリンクです。">
-                        Our team is committed to advancing the field of cybersecurity through in-depth research. Below are links to some of our published papers and articles.
-                    </p>
-                    <div class="space-y-4 text-left">
-                        <a href="https://kth.diva-portal.org/smash/record.jsf?dswid=-9416&pid=diva2%3A1632105&c=1&searchType=SIMPLE&language=en&query=nicolai+hellesnes&af=%5B%5D&aq=%5B%5B%5D%5D&aq2=%5B%5B%5D%5D&aqe=%5B%5D&noOfRows=50&sortOrder=author_sort_asc&sortOrder2=title_sort_asc&onlyFullText=false&sf=all" class="p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:bg-gray-700/50 transition duration-300 block">
-                            <h4 class="font-bold text-lg text-white" data-en="Ethical Hacking of an IoT camera" data-ja="IoTカメラのエシカルハッキング">Ethical Hacking of an IoT camera</h4>
-                            <p class="text-sm text-gray-500" data-en="Published on KTH DiVA, 2022" data-ja="KTH DiVAで公開、2022年">Published on KTH DiVA, 2022</p>
-                            <span class="text-indigo-400 hover:text-indigo-300 transition duration-300 mt-2 inline-block" data-en="Read Paper &rarr;" data-ja="論文を読む &rarr;">Read Paper &rarr;</span>
-                        </a>
-                    </div>
+                <div class="research-block">
+                    <h3 data-en="Discovered CVEs" data-ja="発見したCVE">Discovered CVEs</h3>
+                    <p data-en="Vulnerabilities we have responsibly disclosed to the security community."
+                       data-ja="セキュリティコミュニティに責任を持って開示した脆弱性。">Vulnerabilities we have responsibly disclosed to the security community.</p>
+
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-3897" class="cve-item">
+                        <h4>CVE-2025-3897</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-6588" class="cve-item">
+                        <h4>CVE-2025-6588</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-12064" class="cve-item">
+                        <h4>CVE-2025-12064</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-12078" class="cve-item">
+                        <h4>CVE-2025-12078</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-12079" class="cve-item">
+                        <h4>CVE-2025-12079</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-11263" class="cve-item">
+                        <h4>CVE-2025-11263</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-12076" class="cve-item">
+                        <h4>CVE-2025-12076</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                    <a href="https://www.cve.org/CVERecord?id=CVE-2025-12077" class="cve-item">
+                        <h4>CVE-2025-12077</h4><span data-en="View Details →" data-ja="詳細 →">View Details →</span>
+                    </a>
+                </div>
+
+                <div class="research-block">
+                    <h3 data-en="Academic Research" data-ja="学術研究">Academic Research</h3>
+                    <p data-en="Published papers and articles advancing the field of cybersecurity."
+                       data-ja="サイバーセキュリティ分野の発展に貢献する論文や記事。">Published papers and articles advancing the field of cybersecurity.</p>
+
+                    <a href="https://kth.diva-portal.org/smash/record.jsf?dswid=-9416&pid=diva2%3A1632105&c=1&searchType=SIMPLE&language=en&query=nicolai+hellesnes&af=%5B%5D&aq=%5B%5B%5D%5D&aq2=%5B%5B%5D%5D&aqe=%5B%5D&noOfRows=50&sortOrder=author_sort_asc&sortOrder2=title_sort_asc&onlyFullText=false&sf=all" class="paper-item">
+                        <h4 data-en="Ethical Hacking of an IoT Camera" data-ja="IoTカメラのエシカルハッキング">Ethical Hacking of an IoT Camera</h4>
+                        <div class="meta" data-en="Published on KTH DiVA, 2022" data-ja="KTH DiVAで公開、2022年">Published on KTH DiVA, 2022</div>
+                        <span class="link-text" data-en="Read Paper →" data-ja="論文を読む →">Read Paper →</span>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-[#1a1a2e]">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-semibold mb-4 text-white" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</h2>
-                <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-300" data-en="Ready to protect your business? Get in touch with our team today for a free consultation." data-ja="ビジネスを守る準備はできていますか？無料コンサルテーションのために、今すぐ当社チームにご連絡ください。">
-                    Ready to protect your business? Get in touch with our team today for a free consultation.
-                </p>
-                <form id="contact-form" action="https://formsubmit.co/ajax/contact@monochromesecurity.com" method="POST" class="max-w-xl mx-auto space-y-4 relative">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
+        <!-- ─── CONTACT ─── -->
+        <section id="contact" class="section">
+            <div class="container reveal">
+                <div style="text-align:center">
+                    <div class="section-label" data-en="Get In Touch" data-ja="お問い合わせ">Get In Touch</div>
+                    <h2 class="section-title" data-en="Contact Us" data-ja="お問い合わせ">Contact Us</h2>
+                    <div class="section-sep" style="margin:0 auto 20px"></div>
+                </div>
 
-                    <input type="text" name="name" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Name" data-ja-placeholder="お名前" placeholder="Your Name">
-                    <input type="email" name="email" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Email" data-ja-placeholder="メールアドレス" placeholder="Your Email">
-                    <textarea name="message" rows="4" required class="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 border border-transparent focus:border-indigo-500 focus:outline-none transition duration-300" data-en-placeholder="Your Message" data-ja-placeholder="メッセージ" placeholder="Your Message"></textarea>
-                    <button type="submit" id="submit-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg transition duration-300 transform hover:scale-105" data-en="Send Message" data-ja="メッセージを送信">
-                        Send Message
-                    </button>
-                    <div id="message-box" class="hidden absolute left-1/2 -translate-x-1/2 mt-4 p-4 rounded-lg text-sm transition-all duration-500 transform"></div>
-                </form>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <p data-en="Ready to protect your business? Get in touch with our team today for a free consultation. We'll assess your security posture and recommend a tailored approach."
+                           data-ja="ビジネスを守る準備はできていますか？無料コンサルテーションのために、今すぐ当社チームにご連絡ください。セキュリティ体制を評価し、カスタマイズされたアプローチを提案します。">
+                            Ready to protect your business? Get in touch with our team today for a free consultation. We'll assess your security posture and recommend a tailored approach.
+                        </p>
+                    </div>
+                    <form id="contactForm" action="https://formsubmit.co/ajax/contact@monochromesecurity.com" method="POST" class="contact-form">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="name" required class="contact-input" placeholder="Your Name" data-en-placeholder="Your Name" data-ja-placeholder="お名前">
+                        <input type="email" name="email" required class="contact-input" placeholder="Your Email" data-en-placeholder="Your Email" data-ja-placeholder="メールアドレス">
+                        <textarea name="message" rows="5" required class="contact-input" placeholder="Your Message" data-en-placeholder="Your Message" data-ja-placeholder="メッセージ" style="resize:vertical"></textarea>
+                        <button type="submit" class="submit-btn" id="submitBtn" data-en="Send Message" data-ja="メッセージを送信">Send Message</button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black/30 text-white/50 text-center py-8">
+    <!-- ─── FOOTER ─── -->
+    <footer class="site-footer">
         <p>
-            <span data-en="2025 Monochrome Security. Part of" data-ja="2025 Monochrome Security。">2025 Monochrome Security. Part of</span>
-            <a href="https://monochromesystems.com/" class="text-indigo-400 hover:text-indigo-300 transition duration-300" target="_blank" rel="noopener noreferrer">Monochrome Systems</a><span data-en="." data-ja="の一部です。">.</span>
+            <span data-en="© 2026 Monochrome Security" data-ja="© 2026 Monochrome Security">© 2026 Monochrome Security</span>
+        </p>
+        <p>
+            <span data-en="Part of " data-ja="">Part of </span><a href="https://monochromesystems.com/" target="_blank" rel="noopener noreferrer">Monochrome Systems</a>
         </p>
     </footer>
 
     <script>
-        let currentLang = localStorage.getItem('language') || 'en';
+    /* ═══ HERO INTERACTION ═══ */
+    (() => {
+        const state = { mouseX: -999, mouseY: -999, smoothX: -999, smoothY: -999 };
 
-        function updatePageLanguage() {
-            document.querySelectorAll('[data-en][data-ja]').forEach(element => {
-                const text = element.getAttribute(`data-${currentLang}`);
-                if (text) {
-                    element.textContent = text;
-                }
-            });
+        const imageBase = document.getElementById('heroImageBase');
+        const heroBrand = document.getElementById('heroBrand');
+        const heroCenter = document.getElementById('heroCenter');
+        const heroBottom = document.getElementById('heroBottom');
+        const heroSection = document.getElementById('heroSection');
+        const canvas = document.getElementById('gridCanvas');
+        const ctx = canvas.getContext('2d');
 
-            // Update form placeholders
-            document.querySelectorAll('[data-en-placeholder][data-ja-placeholder]').forEach(element => {
-                const placeholder = element.getAttribute(`data-${currentLang}-placeholder`);
-                if (placeholder) {
-                    element.placeholder = placeholder;
-                }
-            });
+        let W, H;
+        const GRID_SPACING = 60;
+        const gridPoints = [];
 
-            // Update language toggle buttons - show the language you can switch TO
-            const langText = currentLang === 'en' ? '日本語' : 'English';
-            document.getElementById('lang-text').textContent = langText;
-            document.getElementById('mobile-lang-text').textContent = langText;
-
-            // Update page language attribute
-            document.documentElement.lang = currentLang;
+        function resizeCanvas() {
+            W = canvas.width = heroSection.offsetWidth;
+            H = canvas.height = heroSection.offsetHeight;
+            buildGrid();
         }
 
-        function switchLanguage() {
-            currentLang = currentLang === 'en' ? 'ja' : 'en';
-            localStorage.setItem('language', currentLang);
-            updatePageLanguage();
-        }
-
-        // Generate stars for the space scene
-        function generateStars() {
-            const starsContainer = document.getElementById('stars-container');
-            if (!starsContainer) return;
-
-            const starCount = 120;
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-
-                // Random position
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 75 + '%'; // Keep stars in upper 75% (above planet)
-
-                // Random size (1-3px)
-                const size = Math.random() * 2 + 1;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-
-                // Random animation delay and duration for natural twinkling
-                star.style.animationDelay = Math.random() * 3 + 's';
-                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-
-                // Random initial opacity
-                star.style.opacity = Math.random() * 0.5 + 0.3;
-
-                starsContainer.appendChild(star);
+        function buildGrid() {
+            gridPoints.length = 0;
+            for (let x = 0; x <= W + GRID_SPACING; x += GRID_SPACING) {
+                for (let y = 0; y <= H + GRID_SPACING; y += GRID_SPACING) {
+                    gridPoints.push({ ox: x, oy: y, x, y, dx: 0, dy: 0 });
+                }
             }
         }
 
-        // Initialize page with saved language on load
-        document.addEventListener('DOMContentLoaded', () => {
-            updatePageLanguage();
-            generateStars();
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-            // Add event listeners for language toggle buttons
-            document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
-            document.getElementById('mobile-lang-toggle').addEventListener('click', switchLanguage);
+        document.addEventListener('mousemove', e => {
+            state.mouseX = e.clientX;
+            state.mouseY = e.clientY;
         });
 
-        // Smooth scrolling for navigation.
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        document.addEventListener('mouseleave', () => {
+            state.mouseX = -999; state.mouseY = -999;
         });
 
-        // Mobile menu toggle.
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        function updateActiveNavLink() {
-            let currentSection = '';
-            const scrollPosition = window.scrollY + 200;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 300;
-                const sectionBottom = sectionTop + section.offsetHeight;
-
-                if (scrollPosition >= sectionTop) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href');
-                if (href === `#${currentSection}`) {
-                    link.classList.add('active');
-                }
-            });
+        function getParallax(factor) {
+            if (state.smoothX < -500) return { x: 0, y: 0 };
+            const rect = heroSection.getBoundingClientRect();
+            const cx = ((state.smoothX - rect.left) / W - 0.5) * 2;
+            const cy = ((state.smoothY - rect.top) / H - 0.5) * 2;
+            return { x: -cx * factor, y: -cy * factor };
         }
 
-        // Update active link on scroll
-        window.addEventListener('scroll', updateActiveNavLink);
+        function drawGrid() {
+            ctx.clearRect(0, 0, W, H);
+            const rect = heroSection.getBoundingClientRect();
+            const mx = state.smoothX - rect.left;
+            const my = state.smoothY - rect.top;
+            const influence = 120;
 
-        // Update active link on page load
-        window.addEventListener('load', updateActiveNavLink);
+            for (const p of gridPoints) {
+                const dx = p.ox - mx, dy = p.oy - my;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < influence * 3) {
+                    const force = Math.max(0, 1 - dist / (influence * 3));
+                    const angle = Math.atan2(dy, dx);
+                    p.dx += Math.cos(angle) * force * 8 - p.dx * 0.15;
+                    p.dy += Math.sin(angle) * force * 8 - p.dy * 0.15;
+                } else { p.dx *= 0.92; p.dy *= 0.92; }
+                p.x = p.ox + p.dx; p.y = p.oy + p.dy;
+            }
 
-        // Form submission with fetch API.
-        const contactForm = document.getElementById('contact-form');
-        const messageBox = document.getElementById('message-box');
-        const submitBtn = document.getElementById('submit-btn');
+            const prl = getParallax(6);
+            ctx.save();
+            ctx.translate(prl.x * 0.4, prl.y * 0.4);
 
-        contactForm.addEventListener('submit', async (e) => {
+            for (const p of gridPoints) {
+                const dx = p.ox - mx, dy = p.oy - my;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const prox = Math.max(0, 1 - dist / 400);
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1 + prox * 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(80,80,80,' + (0.04 + prox * 0.12) + ')';
+                ctx.fill();
+            }
+
+            const cols = Math.ceil(W / GRID_SPACING) + 1;
+            const rows = Math.ceil(H / GRID_SPACING) + 1;
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = 'rgba(120,120,120,0.04)';
+
+            for (let r = 0; r < rows; r++) {
+                ctx.beginPath();
+                for (let c = 0; c < cols; c++) {
+                    const idx = c * rows + r;
+                    if (idx >= gridPoints.length) continue;
+                    const p = gridPoints[idx];
+                    c === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.stroke();
+            }
+            for (let c = 0; c < cols; c++) {
+                ctx.beginPath();
+                for (let r = 0; r < rows; r++) {
+                    const idx = c * rows + r;
+                    if (idx >= gridPoints.length) continue;
+                    const p = gridPoints[idx];
+                    r === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        function animate() {
+            state.smoothX += (state.mouseX - state.smoothX) * 0.1;
+            state.smoothY += (state.mouseY - state.smoothY) * 0.1;
+
+            const imgP = getParallax(15), brandP = getParallax(8), centerP = getParallax(6), bottomP = getParallax(6);
+            imageBase.style.transform = 'translate(' + imgP.x + 'px,' + imgP.y + 'px) scale(1.05)';
+            heroBrand.style.transform = 'translate(' + brandP.x + 'px,' + brandP.y + 'px)';
+            heroCenter.style.transform = 'translateY(-50%) translate(' + centerP.x + 'px,' + centerP.y + 'px)';
+            heroBottom.style.transform = 'translate(' + bottomP.x + 'px,' + bottomP.y + 'px)';
+
+            drawGrid();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
+
+    /* ═══ HEADER SCROLL ═══ */
+    /* ═══ LANGUAGE ═══ */
+    let currentLang = localStorage.getItem('language') || 'en';
+
+    function updatePageLanguage() {
+        document.querySelectorAll('[data-en][data-ja]').forEach(el => {
+            const val = el.getAttribute('data-' + currentLang);
+            if (val) el.innerHTML = val;
+        });
+        document.querySelectorAll('[data-en-placeholder][data-ja-placeholder]').forEach(el => {
+            const val = el.getAttribute('data-' + currentLang + '-placeholder');
+            if (val) el.placeholder = val;
+        });
+        const t = currentLang === 'en' ? '日本語' : 'English';
+        document.getElementById('langText').textContent = t;
+        document.getElementById('mobileLangText').textContent = t;
+        document.documentElement.lang = currentLang;
+    }
+
+    function switchLang() {
+        currentLang = currentLang === 'en' ? 'ja' : 'en';
+        localStorage.setItem('language', currentLang);
+        updatePageLanguage();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updatePageLanguage();
+        document.getElementById('langToggle').addEventListener('click', switchLang);
+        document.getElementById('mobileLangToggle').addEventListener('click', switchLang);
+    });
+
+    /* ═══ SMOOTH SCROLL ═══ */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('mobileMenu').classList.remove('open');
+        });
+    });
 
-            const formAction = contactForm.getAttribute('action');
-            const formData = new FormData(contactForm);
+    /* ═══ MOBILE MENU ═══ */
+    document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.toggle('open');
+    });
 
-            try {
-                const response = await fetch(formAction, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: formData.get('name'),
-                        email: formData.get('email'),
-                        message: formData.get('message'),
-                        _captcha: 'false',
-                        _template: 'table'
-                    })
-                });
+    /* ═══ CONTACT FORM ═══ */
+    const contactForm = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
 
-                const data = await response.json();
+    contactForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        const fd = new FormData(contactForm);
 
-                if (response.ok && data.success) {
-                    showMessage('Message sent successfully!', 'bg-green-500/20 text-green-300 border-green-500');
-                    contactForm.reset();
-                } else {
-                    showMessage(data.message || 'Something went wrong. Please try again later.', 'bg-red-500/20 text-red-300 border-red-500');
-                }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                showMessage('Network error. Please check your connection.', 'bg-red-500/20 text-red-300 border-red-500');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
+        try {
+            const res = await fetch(contactForm.action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({ name: fd.get('name'), email: fd.get('email'), message: fd.get('message'), _captcha: 'false', _template: 'table' })
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                formMsg.className = 'form-message success';
+                formMsg.textContent = 'Message sent successfully.';
+                contactForm.reset();
+            } else {
+                formMsg.className = 'form-message error';
+                formMsg.textContent = data.message || 'Something went wrong.';
+            }
+        } catch {
+            formMsg.className = 'form-message error';
+            formMsg.textContent = 'Network error. Please try again.';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            setTimeout(() => { formMsg.style.opacity = '0'; setTimeout(() => { formMsg.className = 'form-message'; formMsg.style.opacity = ''; }, 500); }, 5000);
+        }
+    });
+
+    /* ═══ SCROLL REVEAL ═══ */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
         });
+    }, { threshold: 0.1 });
 
-        // Function to show and hide the message box.
-        function showMessage(message, classes) {
-            messageBox.textContent = message;
-            messageBox.className = `${classes} block opacity-100 border-2`;
-            setTimeout(() => {
-                messageBox.classList.add('opacity-0');
-                setTimeout(() => {
-                    messageBox.className = 'hidden';
-                }, 500);
-            }, 5000);
-        }
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
