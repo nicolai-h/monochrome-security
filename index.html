@@ -280,8 +280,25 @@
         .hero-cta:active { transform: translateY(0); }
 
         @media (max-width: 768px) {
-            .hero-tagline-wrap { top: 35%; padding: 0 24px; }
-            .hero-center { top: 50%; left: 24px; right: 24px; max-width: none; }
+            .hero-section {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 80px 24px 80px;
+            }
+            .hero-tagline-wrap {
+                position: relative;
+                top: auto; left: auto; right: auto;
+                padding: 0;
+                margin-bottom: 12px;
+                text-align: left;
+            }
+            .hero-center {
+                position: relative;
+                top: auto; left: auto; right: auto;
+                transform: none !important;
+                max-width: none;
+            }
         }
 
         .hero-bottom {
@@ -327,7 +344,11 @@
         @keyframes fadeInBase { to { opacity: 0.18; } }
 
         @media (max-width: 768px) {
-            .hero-brand { top: 90px; left: 24px; }
+            .hero-brand {
+                position: relative;
+                top: auto; left: auto;
+                margin-bottom: 20px;
+            }
             .hero-bottom { left: 24px; right: 24px; bottom: 32px; }
         }
 
